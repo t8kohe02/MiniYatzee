@@ -35,8 +35,8 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   title: {
+    fontFamily: 'SilkscreenBold',
     color: 'darkgreen',
-    fontWeight: 'bold',
     flex: 1,
     fontSize: 23,
     textAlign: 'center',

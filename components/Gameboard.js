@@ -11,6 +11,7 @@ let spots = new Array(6).fill(0);
 const NumDice = 5;
 const NumThrows = 3;
 const Bonus = 63;
+let CheckBonus = true;
 
 
 export default function Gameboard() {
@@ -52,11 +53,7 @@ export default function Gameboard() {
         countSpots(i);
         unSelectDices();
         setThrowsLeft(NumThrows);
-        if(selectedSpots.every((val) => val === true)){
-            if(Bonus <= points ) {
-                setPoints(points+35);
-            }
-        }
+        
     }
 
     function unSelectDices(){
@@ -79,7 +76,12 @@ export default function Gameboard() {
     function throwDice() {
         if(throwsLeft == 0){
             return;
-        } else if (selectedSpots.every((val) => val === true)){
+        } else if(points >= Bonus && CheckBonus == true) {
+            setPoints(points + 35);
+            CheckBonus = false;
+            return;        
+        
+        }else if (selectedSpots.every((val) => val === true)){
             resetGame();
         } 
         for (let i = 0; i < NumDice; i++){
@@ -96,6 +98,7 @@ export default function Gameboard() {
         spots.fill(0);
         selectedSpots.fill(false);
         setPoints(0);
+        CheckBonus = true;
     }
 
     function recievedBonus(){
